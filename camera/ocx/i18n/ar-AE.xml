@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Content>
+	<Rect>مستوى خطورة الإنذار</Rect>
+	<Polygon>مستوى الخطورة</Polygon>
+	<Delete>الوزن</Delete>
+	<DisplayMode>الوزن</DisplayMode>
+	<Play>نوع الإنذار</Play>
+	<Stop>نإدارة الإنذارات</Stop>
+	<SnapShot>نوع الإنذار</SnapShot>
+	<LocalRecord>نوع الإنذار</LocalRecord>
+	<PlayRecord>نوع الإنذار</PlayRecord>
+	<BookMark>نوع الإنذار</BookMark>
+	<Zoom>نوع الإنذار</Zoom>
+	<PTZ>نوع الإنذار</PTZ>
+	<PlaySound>ارتباط تشعبي</PlaySound>
+	<PlayNoSound>لون الخط</PlayNoSound>
+	<TalkBack>يُرجى تحديد النص لإنشاء الرابط</TalkBack>
+	<NoTalkBack>رمز مصدر الإنذار</NoTalkBack>
+	<VideoTVW>نوع الإنذار</VideoTVW>
+	<AlarmWin>نوع الإنذار</AlarmWin>
+	<OpenMap>نوع الإنذار</OpenMap>
+	<WindowMain>نوع الإنذار</WindowMain>
+	<IA>نوع الإنذار</IA>
+	<PlayQuality>نوع الإنذار</PlayQuality>
+	<PlayNet>نوع الإنذار</PlayNet>
+	<Extend>نوع الإنذار</Extend>
+	<Retracted>نوع الإنذار</Retracted>
+	<PTZ3D>نوع الإنذار</PTZ3D>
+	<ReConnecting>نوع الإنذار</ReConnecting>
+	<Off>إيقاف التسجيل</Off>
+	<Info>ع الإنذار</Info>
+	<ZoomIn>نوع الإنذ</ZoomIn>
+	<ZoomOut>إضافة نوع الإنذار</ZoomOut>
+	<ZoomOver>نوع الإنذار</ZoomOver>
+	<TVWallVideoBroken>نوع الإنذار</TVWallVideoBroken>
+	<TVWallDecDisconn>د عدد كبير جداً من الأجهزة. الحد الأقصى للبحث عن الإنذارات المحفوظة هو 30 جهاز.</TVWallDecDisconn>
+	<TVWallHandling>نوع الإنذار</TVWallHandling>
+	<TVWallOK>نوع الإنذار</TVWallOK>
+	<WatermarkGary>فئة الإنذار</WatermarkGary>
+	<WatermarkNomal>نوع الإنذار</WatermarkNomal>
+	<TrunCuise>تأخر</TrunCuise>
+	<SingleFrameStatus>نوع الإنذار</SingleFrameStatus>
+	<AlarmStatus>نوع الإنذار</AlarmStatus>
+	<RecordStatus>نوع الإنذار</RecordStatus>
+	<CruiseTrackStatus>نفئة الإنذار</CruiseTrackStatus>
+	<TvWalling>إضافة نوع الإنذار</TvWalling>
+	<TVWallReConnect>التفاصيل</TVWallReConnect>
+</Content>

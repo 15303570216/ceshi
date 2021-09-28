@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Content>
+    <Rect>Rectangle</Rect>
+    <Polygon>Polygone</Polygon>
+    <Delete>Supprimer</Delete>
+    <DisplayMode>Ajuster la disposition</DisplayMode>
+    <Play>Lecture</Play>
+    <Stop>Arrêter</Stop>
+    <SnapShot>Cliché</SnapShot>
+    <LocalRecord>Enregistrement local</LocalRecord>
+    <PlayRecord>Lecture instantanée</PlayRecord>
+    <BookMark>Signet</BookMark>
+    <Zoom>Zoom avant</Zoom>
+    <PTZ>Contrôle PTZ</PTZ>
+    <PlaySound>Volume</PlaySound>
+    <PlayNoSound>Volume</PlayNoSound>
+    <TalkBack>Interphone vocal</TalkBack>
+    <NoTalkBack>Interphone vocal</NoTalkBack>
+    <VideoTVW>Afficher la vidéo sur le mur vidéo</VideoTVW>
+    <AlarmWin>Définir comme volet vidéo d'alarmes</AlarmWin>
+    <OpenMap>Ouvrir eMap</OpenMap>
+    <WindowMain>Définir comme volet vidéo principal</WindowMain>
+    <IA>Afficher les résultats de l'analyse intelligente </IA>
+    <PlayQuality>Priorité qualité d'image</PlayQuality>
+    <PlayNet>Priorité vitesse</PlayNet>
+    <Extend>Développer</Extend>
+    <Retracted>Réduire</Retracted>
+    <PTZ3D>Positionnement 3D</PTZ3D>
+    <ReConnecting>Reconnexion en cours...</ReConnecting>
+    <Off>Fermer</Off>
+    <Info>Informations vidéo</Info>
+    <ZoomIn>Zoom avant</ZoomIn>
+    <ZoomOut>Zoom arrière</ZoomOut>
+    <ZoomOver>Désactiver</ZoomOver>
+    <TVWallVideoBroken>Flux vidéo interrompus </TVWallVideoBroken>
+    <TVWallDecDisconn>Le décodeur est déconnecté de la plate-forme et il est train de s'y reconnecter</TVWallDecDisconn>
+    <TVWallHandling>Lecture de vidéos sur le mur vidéo</TVWallHandling>
+    <TVWallOK>Vidéos lues sur le mur vidéo</TVWallOK>
+    <WatermarkGary>Pas de filigrane numérique</WatermarkGary>
+    <WatermarkNomal>Filigrane numérique</WatermarkNomal>
+    <TrunCuise>Séquençage</TrunCuise>
+    <SingleFrameStatus>Lire les vidéos image par image</SingleFrameStatus>
+    <AlarmStatus>Signaler une alarme</AlarmStatus>
+    <RecordStatus>Enregistrement manuel</RecordStatus>
+    <CruiseTrackStatus>Visite guidée</CruiseTrackStatus>
+    <TvWalling>Envoyer la vidéo vers le mur vidéo</TvWalling>
+    <TVWallReConnect>Reconnexion en cours...</TVWallReConnect>
+</Content>

@@ -1,0 +1,872 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>IVS SDK DEMO</title>
+	<link rel="stylesheet" type="text/css" href="./camera/css/demo.css" />
+	<link rel="stylesheet" type="text/css" href="./camera/css/elementui.css" />
+	<link rel="stylesheet" type="text/css" href="./camera/css/video-audio-download.css" />
+	<link rel="stylesheet" type="text/css" href="./camera/css/polling.css" />
+	<!-- <link rel="stylesheet" type="text/css" href="./camera/layui/css/layui.css" /> -->
+	<script type="text/javascript" src="./camera/js/testingToken.js"></script>
+	<script type="text/javascript" src="./camera/js/jquery/jquery.js"></script>
+	<script type="text/javascript" src="./camera/js/jquery/jquery.ui.js"></script>
+	<script type="text/javascript" src="./camera/js/jquery/jquery.overlaycallback.js"></script>
+	<script type="text/javascript" src="./camera/js/jquery/jquery.ui.dialog.js"></script>
+	<script type="text/javascript" src="./camera/js/jquery/jquery.bgiframe.js"></script>
+	<script type="text/javascript" src="./camera/js/jquery/jquery.ui.datepicker.js"></script>
+	<script type="text/javascript" src="./camera/js/jquery/jquery.layout.js"></script>
+	<script type="text/javascript" src="./camera/js/jquery/jquery.ztree.core.js"></script>
+	<script type="text/javascript" src="./camera/js/jquery/jquery.ztree.excheck.js"></script>
+	<script type="text/javascript" src="./camera/js/jquery/jquery.ztree.exedit.js"></script>
+	<script type="text/javascript" src="./camera/js/jquery/jquery.sha256.min.js"></script>
+	<script type="text/javascript" src="./camera/js/jquery/jquery.combobox.js"></script>
+	<script type="text/javascript" src="./camera/js/jquery/jquery.ui.autocomplete.js"></script>
+	<script type="text/javascript" src="./camera/js/demo_main.js"></script>
+	<script type="text/javascript" src="./camera/js/demo_login.js"></script>
+	<script type="text/javascript" src="./camera/js/demo_window.js"></script>
+	<script type="text/javascript" src="./camera/js/demo_live.js"></script>
+	<script type="text/javascript" src="./camera/js/demo_video.js"></script>
+	<script type="text/javascript" src="./camera/js/demo_play.js"></script>
+	<script type="text/javascript" src="./camera/js/demo_voice.js"></script>
+	<script type="text/javascript" src="./camera/js/demo_download.js"></script>
+	<script type="text/javascript" src="./camera/js/i18n/demo_en_US.js"></script>
+	<script type="text/javascript" src="./camera/js/i18n/demo_zh_CN.js"></script>
+	<script type="text/javascript" src="./camera/js/customEvents.js"></script>
+	<script type="text/javascript" src="./camera/js/vue.js"></script>
+	<script type="text/javascript" src="./camera/js/ajaxData.js"></script>
+	<script type="text/javascript" src="./camera/js/elementui.js"></script>
+	<script type="text/javascript" src="./camera/js/moment.js"></script>
+
+	<script type="text/javascript">
+		function changeTextColor() {
+			var i = document.getElementById("resultcode").value;
+			var str = i.toString().split(":");
+			if (str[1].toString() != "0") {
+				document.getElementById("resultcode").style.color = "red";
+			}
+			else {
+				document.getElementById("resultcode").style.color = "black";
+			}
+		}
+	</script>
+
+</head>
+
+<body id="app" onLoad="init();" onbeforeunload="closeSession();">
+	<div class="content" id="content">
+		<!-- 标志头  -->
+		<div id="left">
+			<!-- <div id="pages"> -->
+			<div id="page">
+				<!-- 登录注销页面 -->
+				<div id="table">
+					<!-- <a href="./shdw.html">去手环</a> -->
+					<div class="page-tab-box">
+						<div class="page-tab-box-but page-tab-box-but-active" onClick="changePage(1)">实况<span
+								class="newsnum">{{newsnum}}</span></div>
+						<div class="page-tab-box-but" onClick="changePage(2)">轮训</div>
+						<div class="page-tab-box-but" onClick="changePage(3)">录像</div>
+						<!-- <div class="page-tab-box-but" onClick="changePage(4)">对讲广播</div> -->
+						<div class="page-tab-box-but" onClick="changePage(4)">设置</div>
+						<!-- <div class="set-icon openSetWindowToolBox"></div> -->
+					</div>
+				</div>
+				<div id="login" class="div_page  div_page_show">
+					<div class="live-top">
+						<div style="height: 62px;"></div>
+						<div>
+							<!-- <span id="userNameLbl" style="display:inline-block; width:50px;">用户名 :</span> -->
+							<input id="user" type="hidden" value="youwei">
+							<!-- <span id="userPwdLbl" style="display:inline-block; width:50px;padding-left:30px">密码:</span> -->
+							<input id="pwd" type="hidden" value="Uweic@123">
+							<!-- Uweic@123 -->
+							<!-- F4-7-b06&15 -->
+							<!-- <input id="loginBtn" type="button" value="登录" onClick="setLogin();"> -->
+							<!-- <span id="serverLbl" style="display:inline-block; width:50px;">服务器:</span> -->
+							<input id="ip" type="hidden" value="192.168.0.110">
+							<!-- 192.168.1.111 -->
+							
+							<!-- 59.36.10.82 -->
+							<!-- <span id="portLbl" style="display:inline-block; width:50px;padding-left:30px">端口:</span> -->
+							<input id="port" type="hidden" value="9900">
+						</div>
+						<div class="tab-title-box">
+							<ul class="tab-title">
+								<li class="tab-title-item choice">资源列表</li>
+								<li class="tab-title-item">云台控制</li>
+							</ul>
+						</div>
+
+						<div class="tab-box">
+							<div class="tab-item show">
+								<el-tree :data="cameraList" :default-expand-all="true" :props="defaultProps"
+									@node-click="handleNodeClick">
+								</el-tree>
+							</div>
+							<div class="tab-item">
+								<div class="console">
+									<div class="console-left">
+										<div class="but">
+											<div class="zoom-small" onMouseDown="ptzControlMethod(24)"
+												onMouseUp="ptzControlMethod(1)"></div>
+											<div class="zoom-big" onMouseDown="ptzControlMethod(23)"
+												onMouseUp="ptzControlMethod(1)"></div>
+										</div>
+									</div>
+									<div class="console-center">
+										<div class="other-position">
+											<div class="left-top" onMouseDown="ptzControlMethod(5)"
+												onMouseUp="ptzControlMethod(1)"></div>
+											<div class="right-top-c" onMouseDown="ptzControlMethod(8)"
+												onMouseUp="ptzControlMethod(1)"></div>
+											<div class="left-down" onMouseDown="ptzControlMethod(6)"
+												onMouseUp="ptzControlMethod(1)"></div>
+											<div class="right-down" onMouseDown="ptzControlMethod(9)"
+												onMouseUp="ptzControlMethod(1)"></div>
+										</div>
+										<div class="up-icon" onMouseDown="ptzControlMethod(2)"
+											onMouseUp="ptzControlMethod(1)"></div>
+										<div class="down-icon" onMouseDown="ptzControlMethod(3)"
+											onMouseUp="ptzControlMethod(1)"></div>
+										<div class="left-icon" onMouseDown="ptzControlMethod(4)"
+											onMouseUp="ptzControlMethod(1)"></div>
+										<div class="right-icon" onMouseDown="ptzControlMethod(7)"
+											onMouseUp="ptzControlMethod(1)"></div>
+										<div class="refresh-icon"></div>
+									</div>
+									<div class="console-right">
+										<div class="but">
+											<div onClick="ptzControlMethod(35)" class="lock-open"></div>
+											<div onClick="ptzControlMethod(34)" class="lock-close"></div>
+										</div>
+									</div>
+								</div>
+								<!-- <div class="preset-position">
+									<div class="init-preset">
+										<p>
+											<span>初始预置位</span>
+											<select>
+												<option>1</option>
+												<option>2</option>
+											</select>
+											<button class="but-style">召唤</button>
+										</p>
+									</div>
+									<div class="set-preset">
+										<p>
+											<span>设置预置位</span>
+											<select>
+												<option>1</option>
+												<option>2</option>
+											</select>
+											<button class="but-style">加</button>
+										</p>
+									</div>
+									<div class="del-preset">
+										<p>
+											<span>删除预置位</span>
+											<select>
+												<option>1</option>
+												<option>2</option>
+											</select>
+											<button class="but-style">删除</button>
+										</p>
+									</div>
+								</div> -->
+							</div>
+						</div>
+					</div>
+					<div class="live-bottom">
+						<div v-if="newsInfoShow" class="news-info-text-icon-box">
+							<div class="news-info-text-content">{{itemObj.alarmDetailReason}}</div>
+						</div>
+						<p>
+							<span class="news-info-title">告警消息</span>
+							<span>更多</span>
+						</p>
+						<ul class="news-box" @scroll="listenScroll" v-if="!newsInfoShow">
+							<li v-for="(item,i) in alarmAllList" :kes='i'>
+								<div class="news-list-left">
+									<div class="news-icon">
+										<img src="./camera/image/icon/behavior-icon.png" alt="">
+									</div>
+									<div class="news-name">
+										<p>设备名称</p>
+										<p>{{item.equipmentName}}</p>
+									</div>
+									<div class="news-detailedinfo">
+										<p>{{item.alarmTime}}</p>
+										<p>
+											<span>报警等级</span>
+											<span>{{item.alarmLevel}}</span>
+										</p>
+									</div>
+								</div>
+
+								<div class="news-list-right">
+									<div class="news-but">
+										<div @click="ignore(item)"></div>
+										<div @click="handleAlarm(item)" class="handle-but"></div>
+									</div>
+								</div>
+							</li>
+						</ul>
+						<div v-if="newsInfoShow" class="news-info">
+							<p>
+								<span>告警类型</span>
+								<span>告警级别</span>
+							</p>
+							<p>
+								<span>{{itemObj.alarmRuleType}}</span>
+								<span class="level">{{itemObj.alarmLevel}}</span>
+							</p>
+							<p style="margin-top: 16px;">
+								<span>设备名称</span>
+								<span>IP地址</span>
+							</p>
+							<p>
+								<span>{{itemObj.equipmentName}}</span>
+								<span>{{itemObj.equipmentIp}}</span>
+							</p>
+							<p style="margin-top: 16px;">
+								<span>告警时间</span>
+							</p>
+							<p>
+								<span>{{itemObj.alarmTime}}</span>
+							</p>
+							<p style="margin-top: 16px;font-size: 14px;">处置意见</p>
+							<textarea v-model="alarmUpdateform.processingContent" class="changepinion" rows="6 "
+								cols="46"></textarea>
+							<div class="news-info-but-box">
+								<div>
+									<div @click="alarmCancel" class="news-cancel-btn "></div>
+									<div @click="handleAlarmResult" class="news-determine-btn "></div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="polling" class="div_page ">
+					<div class="polling-top">
+						<div style="height: 62px;"></div>
+						<div class="polling-set">
+							<div>
+								<span>组轮询时间间隔</span>
+								<input class="public_input" v-model="pollingTime" type="text">
+								<button @click="openAddOrEditPage"></button>
+							</div>
+						</div>
+						<div class="polling-list">
+							<!-- {{pollingList}} -->
+							<div>
+								<p>
+									<span class="layui-icon el-icon-caret-bottom layui-icon-triangle-d"></span>
+									<span>轮询组列表</span>
+								</p>
+								<ul>
+									<li v-for="(item,i) in pollingList" :kes='i' class="layui-row">
+										<span class="layui-icon el-icon-caret-right layui-icon-triangle-r"></span>
+										<span @click="pollingItemHandel(item,i)"
+											class="group-name pointer">{{item.roundName}}</span>
+										<span><input v-model="item.checked" type="checkbox"></span>
+										<span @click="openAddOrEditPage(item)"
+											class="layui-icon el-icon-edit layui-icon-edit pointer"></span>
+										<span @click="delPollingList(item.roundId)"
+											class="layui-icon el-icon-delete pointer"></span>
+									</li>
+								</ul>
+							</div>
+
+						</div>
+						<div class="polling-start-button">
+							<button @click="startPolling">{{startOrstop ? "开始轮询" : "停止轮询"}}</button>
+						</div>
+					</div>
+
+					<div class="polling-bottom">
+						<p class="icon-title icon-title-pl">
+							<span class="icon-title-icon"></span>
+							<span class="icon-title-text">轮训组详情</span>
+						</p>
+						<div class="polling-table-box">
+							<el-table :data="pollingIteDeviceList" border style="width: 100%">
+								<el-table-column type="index" align="center" label="序号" width="100">
+								</el-table-column>
+								<el-table-column prop="device.aliasName" align="center" label="摄像机名称">
+								</el-table-column>
+								<el-table-column prop="pane" align="center" label="窗格绑定">
+								</el-table-column>
+							</el-table>
+						</div>
+					</div>
+				</div>
+				<!-- 录像 -->
+				<div id="window" class="div_page">
+					<div class="videotape-top">
+						<div style="border:none;height: 62px;"></div>
+						<p class="div_page_top_title">资源列表`</p>
+						<div class="tree-box">
+							<div class="aaa">
+								<el-tree :data="cameraList" :props="defaultProps" :default-expand-all="true"
+									@node-click="videoHandleNodeClick">
+								</el-tree>
+							</div>
+						</div>
+
+					</div>
+					<div class="videotape-bottom">
+						<ul class="videotape-title">
+							<li class="videotape-title-item videotape-choice">文件列表</li>
+							<li class="videotape-title-item">录像计划</li>
+						</ul>
+						<div class="videotape-box">
+							<div class="videotape-item videotape-show">
+								<p class="icon-title">
+									<span class="icon-title-icon"></span>
+									<span class="icon-title-text">录像检索</span>
+								</p>
+								<div class="videotape-form">
+									<div class="videotape-form-line">
+										<div class="videotape-form-left">
+											<span>摄像机名称</span>
+											<span>{{videoCameraName}}</span>
+										</div>
+									</div>
+									<div class="videotape-form-line">
+										<div class="videotape-form-left">
+											<span>时间段</span>
+											<el-date-picker
+												v-model="getVideoStartTime"
+												size="mini"
+												type="datetime"
+												style="width: 160px;"
+												value-format="yyyy:MM:dd HH:mm:ss"
+												placeholder="开始日期">
+											</el-date-picker>
+											
+											<el-date-picker
+												v-model="getVideoStartEnd"
+												style="width: 160px;"
+												size="mini"
+												type="datetime"
+												value-format="yyyy:MM:dd HH:mm:ss"
+												placeholder="结束日期">
+											</el-date-picker>
+											<!-- <el-date-picker size="mini" style="width: 280px;" v-model="videoTimeArr"
+												type="datetimerange" range-separator="至" start-placeholder="开始日期"
+												value-format="yyyy:MM:dd HH:mm:ss" end-placeholder="结束日期">
+											</el-date-picker> -->
+										</div>
+									</div>
+									<div class="videotape-form-but-box">
+										<div class="videotape-form-but-empty">清空</div>
+										<div class="videotape-form-but-retrieval" @click="retrieval">检索</div>
+									</div>
+								</div>
+								<p class="icon-title">
+									<span class="icon-title-icon"></span>
+									<span class="icon-title-text">文件列表</span>
+								</p>
+								<div class="videotape-table">
+									<!-- {{storageVideolist}} -->
+									<el-table :data="storageVideolist" height="160"  border style="width: 100%;">
+										<el-table-column prop="startTime" align="center" width="120" label="起始时间">
+										</el-table-column>
+										<el-table-column prop="endTime" align="center"  width="120" label="结束时间">
+										</el-table-column>
+										<el-table-column align="center" label="播放窗格">
+											<template slot-scope="scope">
+												<select style="width: 80px;" v-model="scope.row.pane" 
+													placeholder="请选择">
+													<option v-for="(item,index) in scope.row.wndNum"
+														:key="item">
+														{{item}}
+													</option>
+												</select>
+											</template>
+										</el-table-column>
+										<el-table-column align="center" width="100" label="操作">
+											<template slot-scope="scope">
+												<button class="but-style" style="padding:0 8px;" @click="playVideo(scope.row)">{{scope.row.status ? "关闭" : "播放"}}</button>
+												<!-- <button>停止</button> -->
+												<!-- scope.row -->
+											</template>
+										</el-table-column>
+									</el-table>
+								</div>
+							</div>
+							<div class="videotape-item">
+								<div style="overflow-y: auto;height: 394px;">
+									<p class="icon-title">
+										<span class="icon-title-icon"></span>
+										<span class="icon-title-text">录像选项</span>
+									</p>
+									<div class="video-plan-box">
+										<el-row>
+											<el-col :span="4">摄像机名称</el-col>
+											<el-col :span="12">
+												{{videoCameraName}}
+											</el-col>
+										</el-row>
+										<el-row>
+											<el-col :span="4">计划方式</el-col>
+											<el-col :span="18">
+												<!-- <el-radio-group v-model="videoPlanFormMode">
+												<el-radio :label=1>日计划
+												</el-radio>
+												<el-radio :label=0>周计划
+												</el-radio>
+												<el-radio :label=2>全程计划
+												</el-radio>
+											</el-radio-group> -->
+												<el-col :span="8">
+													<span><input type="radio" v-model="videoPlanFormMode"
+															value="1">日计划</span>
+												</el-col>
+												<el-col :span="8">
+													<span><input type="radio" v-model="videoPlanFormMode"
+															value="0">周计划</span>
+												</el-col>
+												<el-col :span="8">
+													<span><input type="radio" v-model="videoPlanFormMode"
+															value="2">全程计划</span>
+												</el-col>
+											</el-col>
+										</el-row>
+										<el-row>
+											<el-col :span="4">日计划</el-col>
+											<el-col v-show="videoPlanFormMode==1" :span="12">
+												每日
+											</el-col>
+											<el-col v-show="videoPlanFormMode==0" :span="20">
+												<button class="weekBtn" :class="{'weekBtnActive':item.active}"
+													@click="selectWeek(item)" v-for="(item,index) in weekArr"
+													:kes="index">{{item.name}}</button>
+											</el-col>
+											<el-col v-show="videoPlanFormMode==2" :span="12">
+												全程
+											</el-col>
+										</el-row>
+										<el-row>
+											<el-col :span="4">时间段</el-col>
+											<el-col :span="20">
+												<el-tag size="mini" @close="timeSlotClose(item)"
+													v-for="item in videoTimeSlot" closable>{{item}}</el-tag>
+											</el-col>
+										</el-row>
+										<div style="margin-top: 10px;">
+											<el-row>
+												<el-col :span="10">
+													<el-time-select size="mini" style="width: 90%;" v-model="startTime"
+														:picker-options="{
+														start: '00:00',
+														step: '00:01',
+														end: '23: 59'
+													}" value-format="HH:mm:ss" placeholder="起始时间">
+													</el-time-select>
+												</el-col>
+												<el-col :span="10">
+													<el-time-select size="mini" style="width: 90%;" arrow-control
+														value-format="HH:mm:ss" v-model="endTime" placeholder="结束时间"
+														:picker-options="{
+															start: '00:00',
+															step: '00:01',
+															end: '23: 59'
+														}">
+													</el-time-select>
+												</el-col>
+												<el-col :span="4">
+													<button :disabled="videoPlanFormMode==2" class="addbut"
+														@click="addTimeSlot">添加</button>
+												</el-col>
+											</el-row>
+										</div>
+									</div>
+									<p class="addVideoPlanListButBox">
+										<button class="addVideoPlanListBut" @click="submitVideoPlan">提交</button>
+									</p>
+									<p class="icon-title">
+										<span class="icon-title-icon"></span>
+										<span class="icon-title-text">录像任务列表-{{planTypeArr[planType]}}</span>
+									</p>
+									<div class="video-plan-table">
+										<el-table :data="videoPlanList" v-if="planType==0" border style="width: 100%">
+											<el-table-column align="center" label="星期">
+												<template slot-scope="scope">
+													<p>{{scope.row.dayType}}</p>
+												</template>
+											</el-table-column>
+											<el-table-column align="center" label="录像时间段">
+												<template slot-scope="scope">
+													<p v-for="item in scope.row.timeSpanInfoList.timeSpan">
+														{{item.startTime.replace(/(..)/g,
+														'$1:').slice(0,-1)}}-{{item.endTime.replace(/(..)/g,
+														'$1:').slice(0,-1)}}</p>
+												</template>
+											</el-table-column>
+										</el-table>
+										<el-table :data="videoPlanList" v-if="planType==1" border style="width: 100%">
+											<el-table-column align="center" label="录像时间段">
+												<template slot-scope="scope">
+													<p style="line-height: 40px;border-bottom:1px solid #EBEEF5 ;"
+														v-for="item in scope.row.timeSpanInfoList.timeSpan">
+														{{item.startTime.replace(/(..)/g,
+														'$1:').slice(0,-1)}}-{{item.endTime.replace(/(..)/g,
+														'$1:').slice(0,-1)}}</p>
+												</template>
+											</el-table-column>
+										</el-table>
+
+										<p style="width: 100%;text-align: center;margin:30px 0 30px 0;"
+											v-if="planType==2">
+											全程计划
+										</p>
+										<p v-show="implementData.enableRecordPlan==0"
+											style="width: 100%;text-align: center;margin:30px 0 30px 0;">
+											<button @click="startVideoPlan" style="background: #FA3D4B;
+											color: #fff;
+											width: 70px;
+											line-height: 30px;
+											border-radius: 4px;">执行计划</button>
+										</p>
+										<p v-show="implementData.enableRecordPlan==1"
+											style="width: 100%;text-align: center;margin:30px 0 30px 0;">
+											<button @click="startVideoPlan(1)" style="background: #FA3D4B;
+											color: #fff;
+											width: 70px;
+											line-height: 30px;
+											border-radius: 4px;">停止计划</button>
+										</p>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+				<!-- 对讲广播-->
+				<!-- <div id="live " class="div_page ">
+					<div style="visibility: hidden; ">
+					</div>
+					<div class="audio-top ">
+						<div style="border:none;height: 62px; "></div>
+						<p class="icon-title icon-title-pl">
+							<span class="icon-title-icon"></span>
+							<span class="icon-title-text">对讲</span>
+						</p>
+						<div class="Intercom-set-box">
+							<ul class="Intercom-set">
+								<li>
+									<span>媒体参数</span>
+									<input type="text">
+								</li>
+								<li>
+									<span>音频设备</span>
+									<input type="text">
+								</li>
+								<li>
+									<span>对话句柄</span>
+									<input type="text">
+								</li>
+							</ul>
+						</div>
+						<div class="microphone">
+							<img src="../image/icon/microphone.png" alt="">
+						</div>
+					</div>
+					<div class="audio-bottom ">
+						<p class="icon-title icon-title-bottom-line icon-title-pl">
+							<span class="icon-title-icon"></span>
+							<span class="icon-title-text">广播</span>
+						</p>
+						<div class="radiobroadcast-top">
+							<div class="radiobroadcast-top-item">
+								<span>广播摄像机编码</span>
+								<input type="text">
+							</div>
+							<div class="radiobroadcast-top-button-box">
+								<span>添加广播摄像机</span>
+								<span>删除广播摄像机</span>
+								<span>获取广播摄像机列表</span>
+							</div>
+							<div class="microphone radiobroadcast-top-microphone">
+								<img src="../image/icon/microphone.png" alt="">
+							</div>
+						</div>
+						<div class="radiobroadcast-bottom">
+							<div class="radiobroadcast-bottom-item">
+								<span>文件夹</span>
+								<input type="text">
+								<button>浏览</button>
+							</div>
+							<div class="radiobroadcast-bottom-item" style="margin-top: 20px;">
+								<span>循环类型</span>
+								<select>
+									<option>循环</option>
+									<option>不循环</option>
+								</select>
+							</div>
+							<div class="microphone radiobroadcast-top-microphone">
+								<img src="../image/icon/microphone.png" alt="">
+							</div>
+						</div>
+					</div>
+
+
+				</div> -->
+				<!-- 下载猪排 -->
+				<div id="video " class="div_page ">
+					<div class="download-top ">
+						<div style="border:none;height: 62px; "></div>
+						<div class="setWindowToolBox ">
+							<p class="icon-title ">
+								<span class="icon-title-icon"></span>
+								<span class="icon-title-text">窗格设置</span>
+							</p>
+							<div class="tool-content ">
+								<p class="row ">
+									<span class="col">
+										<input type="checkbox" id="tool_SNAPSHOT" value="0x00000001">
+										<span id="tool01 ">抓拍</span>
+									</span>
+									<span class="col">
+										<input type="checkbox" id="tool_LOCAL_RECORD" value="0x00000002">
+										<span id="tool02 ">本地录像</span>
+									</span>
+									<span class="col">
+										<input type="checkbox" id="tool_BOOKMARK" value="0x00000004">
+										<span id="tool03 ">书签</span>
+									</span>
+								</p>
+								<p class="row ">
+									<span class="col">
+										<input type="checkbox" id="tool_ZOOM" value="0x00000008">
+										<span id="tool04 ">局部放大</span>
+									</span>
+									<span class="col">
+										<input type="checkbox" id="tool_PLAY_RECORD" value="0x00000010">
+										<span id="tool05 ">即时回放</span>
+									</span>
+									<span class="col">
+										<input type="checkbox" id="tool_PLAY_SOUND" value="0x00000020">
+										<span id="tool06 ">声音</span>
+									</span>
+								</p>
+								<p class="row ">
+									<span class="col">
+										<input type="checkbox" id="tool_TALKBACK" value="0x00000040">
+										<span id="tool07 ">对讲</span>
+									</span>
+									<span class="col">
+										<input type="checkbox" id="tool_VIDEO_TVW" value="0x00000080">
+										<span id="tool08 ">视频上墙</span>
+									</span>
+									<span class="col">
+										<input type="checkbox" id="tool_ALARM_WIN" value="0x00000100">
+										<span id="tool09 ">设置告警窗口</span>
+									</span>
+								</p>
+								<p class="row ">
+									<span class="col">
+										<input type="checkbox" id="tool_PTZ" value="0x00000200">
+										<span id="tool10 ">云镜控制</span>
+									</span>
+									<span class="col">
+										<input type="checkbox" id="tool_IA" value="0x00000400">
+										<span id="tool11 ">叠加智能分析</span>
+									</span>
+									<span class="col">
+										<input type="checkbox" id="tool_OPEN_MAP" value="0x00000800">
+										<span id="tool12 ">打开电子地图</span>
+									</span>
+								</p>
+								<p class="row ">
+									<span class="col">
+										<input type="checkbox" id="tool_WINDOW_MAIN" value="0x00001000">
+										<span id="tool13 ">一主多辅</span>
+									</span>
+									<span>
+										<input type="checkbox" id="tool_PLAY_QUALITY" value="0x00002000">
+										<span id="tool14 ">网速优先/画质优先</span>
+									</span>
+								</p>
+								<p class="foot ">
+									<input id="setToolbarBtn" type="button" value="设置工具栏" onClick="setToolbar();">
+								</p>
+							</div>
+						</div>
+					</div>
+					<!-- <div class="download-center">
+						<p class="icon-title icon-title-bottom-line icon-title-pl">
+							<span class="icon-title-icon"></span>
+							<span class="icon-title-text">下载</span>
+						</p>
+						<div class="download-center-save-box">
+							<div class="download-center-save">
+								<span>保存路劲</span>
+								<input type="text">
+								<button>浏览</button>
+							</div>
+						</div>
+						<div class="download-center-button-box">
+							<button>保存</button>
+						</div>
+					</div>
+					<div class="download-bottom ">
+						<p class="icon-title icon-title-bottom-line icon-title-pl">
+							<span class="icon-title-icon"></span>
+							<span class="icon-title-text">抓拍</span>
+						</p>
+						<div class="capture">
+							<div>
+								<div class="capture-path">
+									<span>抓拍文件路劲</span>
+									<input type="text">
+									<button>浏览</button>
+								</div>
+								<div class="capture-type">
+									<span>循环类型</span>
+									<select>
+										<option>JPG</option>
+									</select>
+									<button>本地单张拍照</button>
+								</div>
+							</div>
+						</div>
+						<div class="capture-button-box">
+							<button>保存</button>
+						</div>
+					</div> -->
+				</div>
+				<div id="addOrEditPolling" v-if="addOrEditShow">
+					<p class="icon-title icon-title-pl icon-title-bottom-line">
+						<span class="icon-title-icon"></span>
+						<span class="icon-title-text">添加轮训组</span>
+					</p>
+					<div class="setPollinInfo">
+						<ul>
+							<li>
+								<span>组名称</span>
+								<input v-model="pollingGroupForm.roundName" class="public_input" type="text">
+							</li>
+							<!-- <li>
+								<span>轮询时间间隔</span>
+								<input v-model="pollingGroupForm.roundInterval" class="public_input" type="text">
+							</li> -->
+						</ul>
+					</div>
+					<p class="resources-title">
+						<span>资源列表</span>
+					</p>
+					<div class="resources-list">
+						<div class="tree-box">
+							<el-tree ref="tree" node-key="equipmentCoding" :data="cameraList" :default-expand-all="true"
+								:highlight-current="true" :expand-on-click-node="false" show-checkbox
+								:props="defaultProps" :default-checked-keys="defaultCheckedKeys"
+								@check-change="publicHandleNodeClick">
+							</el-tree>
+						</div>
+					</div>
+					<div class="resources-camera-list">
+						<div>
+							<el-table :data="addPollingItemList" border>
+								<el-table-column prop="aliasName" align="center" width="122" label="摄像机">
+								</el-table-column>
+								<el-table-column label="播放窗口" align="center" width="220">
+									<template slot-scope="scope">
+										<select v-model="scope.row.pane" @change="selectChange(scope.row.pane)"
+											placeholder="请选择">
+											<option v-for="(item,index) in scope.row.optionArr"
+												@click="selectChange(item,index,scope.row)" :key="item">
+												{{item}}
+											</option>
+										</select>
+										<!-- {{scope.row.optionArr}} -->
+										<!-- <el-select  @change="selectChange" v-model="scope.row.pane" size="mini"  placeholder="请选择">
+											<el-option
+											  v-for="(item,index) in scope.row.optionArr"
+											  :key="item.value"
+											  :label="item.label"
+											  :value="item.value">
+				
+											</el-option>
+										  </el-select> -->
+									</template>
+								</el-table-column>
+								<el-table-column align="center" width="122" label="操作">
+									<template slot-scope="scope">
+										<span @click.prevent="delCamera(scope.row.equipmentCoding)"
+											style="width: 14px;height: 14px;color: #FA3D4B;"
+											class="el-icon-delete"></span>
+									</template>
+								</el-table-column>
+							</el-table>
+						</div>
+					</div>
+					<div class="resources-camera-list-button">
+						<p>
+							<button @click="closeAddPollingPage">取消</button>
+							<button @click="addPollingGroup">保存</button>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="right">
+			<div class="right-top">
+				<div style="width: 50px;float: left;height: 40px; ">
+					<button onClick="setFullScreen()" class="fullscreen-but"></button>
+				</div>
+				<div style="width: 25px;float: left;">
+					<button class="layout-but"></button>
+				</div>
+				<div class="layout-style ">
+					<ul>
+						<li onClick="setLayout(1); ">单画面</li>
+						<li onClick="setLayout(4); ">4画面</li>
+						<li onClick="setLayout(6); ">6画面</li>
+						<li onClick="setLayout(9); ">9画面</li>
+					</ul>
+				</div>
+				<div class="scaleBtnBox ">
+					<button onClick="setScale(1) ">原始比例</button>
+					<button onClick="setScale(2) ">铺满窗格</button>
+				</div>
+			</div>
+			<div class="right-bottom">
+				<object id="ocx" classid="CLSID:3556A474-8B23-496F-9E5D-38F7B74654F4"
+					codebase="../ocx/IVS_OCX.cab#version=2,2,0,36"></object>
+			</div>
+		</div>
+	</div>
+
+</body>
+
+</html>
+<script language="javascript" for="ocx" event="IVS_OCX_Event(MSG_TYPE,data)">
+	var xmlDoc = $.parseXML(data);
+	xmlDoc = $(xmlDoc);
+
+	$("#eventType").val("IVS_OCX_Event:" + MSG_TYPE);
+
+</script>
+<script language="javascript" for="ocx" event="IVS_OCX_Windows_Event(MSG_TYPE,data)">
+	var xmlDoc = $.parseXML(data);
+	xmlDoc = $(xmlDoc);
+
+	$("#eventType").val("IVS_OCX_Windows_Event:" + MSG_TYPE);	  
+</script>
+<script src="./camera/js/vueExample.js"></script>
+<script>
+	
+	window.onload = function () {
+		if (location.href.indexOf('#reloaded') == -1) {
+			location.href = location.href + "#reloaded";
+			location.reload();
+		}
+		setInit()
+	}
+</script>

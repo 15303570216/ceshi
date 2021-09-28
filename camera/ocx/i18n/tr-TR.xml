@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Content>
+    <Rect>Dikdörtgen</Rect>
+    <Polygon>Poligon</Polygon>
+    <Delete>Sil</Delete>
+    <DisplayMode>Düzeni Ayarla</DisplayMode>
+    <Play>Yürüt</Play>
+    <Stop>Durdur</Stop>
+    <SnapShot>Anlık görüntü</SnapShot>
+    <LocalRecord>Yerel Kayıt</LocalRecord>
+    <PlayRecord>Anlık Kayıttan Oynatma</PlayRecord>
+    <BookMark>Yer imi</BookMark>
+    <Zoom>Yakınlaştır</Zoom>
+    <PTZ>PTZ Kontrolü</PTZ>
+    <PlaySound>Ses seviyesi</PlaySound>
+    <PlayNoSound>Ses seviyesi</PlayNoSound>
+    <TalkBack>Sesli Intercom</TalkBack>
+    <NoTalkBack>Sesli Intercom</NoTalkBack>
+    <VideoTVW>Video Duvarında Video Görüntüle</VideoTVW>
+    <AlarmWin>Alarm Video Bölmesi olarak Ayarla</AlarmWin>
+    <OpenMap>eMap'i aç</OpenMap>
+    <WindowMain>Ana Video Bölmesi olarak Ayarla</WindowMain>
+    <IA>Akıllı Analiz Sonuçlarını Göster </IA>
+    <PlayQuality>Görüntü Kalitesi Önceliği</PlayQuality>
+    <PlayNet>Hız Önceliği</PlayNet>
+    <Extend>Büyüt</Extend>
+    <Retracted>Küçült</Retracted>
+    <PTZ3D>3B Konumlandırma</PTZ3D>
+    <ReConnecting>Yeniden bağlanıyor...</ReConnecting>
+    <Off>Kapat</Off>
+    <Info>Video Bilgisi</Info>
+    <ZoomIn>Yakınlaştır</ZoomIn>
+    <ZoomOut>Uzaklaştır</ZoomOut>
+    <ZoomOver>Devre Dışı Bırak</ZoomOver>
+    <TVWallVideoBroken>Video akışları kesildi </TVWallVideoBroken>
+    <TVWallDecDisconn>Kod çözücü platformdan ayrıldı ve platforma yeniden bağlanıyor</TVWallDecDisconn>
+    <TVWallHandling>Video duvarında oynatılmakta olan videolar </TVWallHandling>
+    <TVWallOK>Video duvarında oynatılan videolar</TVWallOK>
+    <WatermarkGary>Filigran bilgileri yok</WatermarkGary>
+    <WatermarkNomal>Filigran bilgileri</WatermarkNomal>
+    <TrunCuise>Sıralama </TrunCuise>
+    <SingleFrameStatus>Videolar çerçeve çerçeve oynatılıyor</SingleFrameStatus>
+    <AlarmStatus>Bir alarm haber veriliyor</AlarmStatus>
+    <RecordStatus>Manüel kayıt</RecordStatus>
+    <CruiseTrackStatus>Gezinti</CruiseTrackStatus>
+    <TvWalling>Video duvarına video itiliyor</TvWalling>
+    <TVWallReConnect>Yeniden bağlanıyor...</TVWallReConnect>
+</Content>

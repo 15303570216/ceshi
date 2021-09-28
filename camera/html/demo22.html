@@ -1,0 +1,1035 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>IVS SDK DEMO</title>
+<link rel="stylesheet" type="text/css" href="../css/demo.css" />
+<link rel="stylesheet" type="text/css" href="../css/video-audio-download.css" />
+<link rel="stylesheet" type="text/css" href="../layui/css/layui.css" />
+<link rel="stylesheet" type="text/css" href="../css/polling.css" />
+<script type="text/javascript" src="../js/jquery/jquery.js"></script>
+<script type="text/javascript" src="../js/jquery/jquery.ui.js"></script>
+<script type="text/javascript" src="../js/jquery/jquery.overlaycallback.js"></script>
+<script type="text/javascript" src="../js/jquery/jquery.ui.dialog.js"></script>
+<script type="text/javascript" src="../js/jquery/jquery.bgiframe.js"></script>
+<script type="text/javascript" src="../js/jquery/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="../js/jquery/jquery.layout.js"></script>
+<script type="text/javascript" src="../js/jquery/jquery.ztree.core.js"></script>
+<script type="text/javascript" src="../js/jquery/jquery.ztree.excheck.js"></script>
+<script type="text/javascript" src="../js/jquery/jquery.ztree.exedit.js"></script>
+<script type="text/javascript" src="../js/jquery/jquery.sha256.min.js"></script>
+<script type="text/javascript" src="../js/jquery/jquery.combobox.js"></script>
+<script type="text/javascript" src="../js/jquery/jquery.ui.autocomplete.js"></script>
+<script type="text/javascript" src="../js/demo_main.js"></script>
+<script type="text/javascript" src="../js/demo_login.js"></script>
+<script type="text/javascript" src="../js/demo_window.js"></script>
+<script type="text/javascript" src="../js/demo_live.js"></script>
+<script type="text/javascript" src="../js/demo_video.js"></script>
+<script type="text/javascript" src="../js/demo_play.js"></script>
+<script type="text/javascript" src="../js/demo_voice.js"></script>
+<script type="text/javascript" src="../js/demo_download.js"></script>
+<script type="text/javascript" src="../js/i18n/demo_en_US.js"></script>
+<script type="text/javascript" src="../js/i18n/demo_zh_CN.js"></script>
+<script type="text/javascript" src="../js/customEvents.js"></script>
+<script type="text/javascript" src="../layui/layui.all.js"></script>
+
+<script type="text/javascript">
+    function changeTextColor() {
+       var i = document.getElementById("resultcode").value;
+        var str = i.toString().split(":");
+        if (str[1].toString() != "0") {
+            document.getElementById("resultcode").style.color = "red";
+        }
+        else {
+            document.getElementById("resultcode").style.color = "black";
+        }
+    }
+</script>
+
+</head>
+<body onLoad="init();" onbeforeunload="closeSession();" >
+	<div class="content">
+    <!-- 标志头  -->
+	<div id="left">
+		<!-- <div id="pages"> -->
+		<div id="page">
+			<!-- 登录注销页面 -->
+			<div id="table">
+				<div class="page-tab-box">
+					<div class="page-tab-box-but page-tab-box-but-active" onClick="changePage(1)">实况<span class="newsnum">0</span></div>
+					<div class="page-tab-box-but" onClick="changePage(2)">轮训</div>
+					<div class="page-tab-box-but" onClick="changePage(3)">录像</div>
+					<div class="page-tab-box-but" onClick="changePage(4)">对讲广播</div>
+					<div class="page-tab-box-but" onClick="changePage(5)">设置</div>
+					<!-- <div class="set-icon openSetWindowToolBox"></div> -->
+				</div>
+			</div>
+			<div id="login" class="div_page div_page_show ">
+				<div class="live-top">
+					<div style="height: 62px;"></div>
+					<div>
+						<!-- <span id="userNameLbl" style="display:inline-block; width:50px;">用户名 :</span> -->
+						<input id="user" type="hidden" value="youwei">
+						<!-- <span id="userPwdLbl" style="display:inline-block; width:50px;padding-left:30px">密码:</span> -->
+						<input id="pwd" type="hidden" value="Uweic@123">
+						<!-- Uweic@123 -->
+						<!-- F4-7-b06&15 -->
+						<!-- <input id="loginBtn" type="button" value="登录" onClick="setLogin();"> -->
+						<!-- <span id="serverLbl" style="display:inline-block; width:50px;">服务器:</span> -->
+						<input id="ip" type="hidden" value="192.168.1.111">
+						<!-- 192.168.1.111 -->
+						<!-- 59.36.10.82 -->
+						<!-- <span id="portLbl" style="display:inline-block; width:50px;padding-left:30px">端口:</span> -->
+						<input id="port" type="hidden" value="9900">
+					</div>
+					<div class="tab-title-box">
+						<ul class="tab-title">
+							<li class="tab-title-item choice">资源列表</li>
+							<li class="tab-title-item">云台控制</li>
+						</ul>
+					</div>
+
+					<div class="tab-box">
+						<div class="tab-item show">
+							<ul class="cameraList">
+							</ul>
+						</div>
+						<div class="tab-item">
+							<div class="console">
+								<div class="console-left">
+									<div class="but">
+										<div class="zoom-small" onMouseDown="ptzControlMethod(24)" onMouseUp="ptzControlMethod(1)"></div>
+										<div class="zoom-big" onMouseDown="ptzControlMethod(23)" onMouseUp="ptzControlMethod(1)"></div>
+									</div>
+								</div>
+								<div class="console-center">
+									<div class="other-position">
+										<div class="left-top" onMouseDown="ptzControlMethod(5)" onMouseUp="ptzControlMethod(1)"></div>
+										<div class="right-top-c" onMouseDown="ptzControlMethod(8)" onMouseUp="ptzControlMethod(1)"></div>
+										<div class="left-down" onMouseDown="ptzControlMethod(6)" onMouseUp="ptzControlMethod(1)"></div>
+										<div class="right-down" onMouseDown="ptzControlMethod(9)" onMouseUp="ptzControlMethod(1)"></div>
+									</div>
+									<div class="up-icon" onMouseDown="ptzControlMethod(2)" onMouseUp="ptzControlMethod(1)"></div>
+									<div class="down-icon" onMouseDown="ptzControlMethod(3)" onMouseUp="ptzControlMethod(1)"></div>
+									<div class="left-icon" onMouseDown="ptzControlMethod(4)" onMouseUp="ptzControlMethod(1)"></div>
+									<div class="right-icon" onMouseDown="ptzControlMethod(7)" onMouseUp="ptzControlMethod(1)"></div>
+									<div class="refresh-icon"></div>
+								</div>
+								<div class="console-right">
+									<div class="but">
+										<div onClick="ptzControlMethod(35)" class="lock-open"></div>
+										<div onClick="ptzControlMethod(34)" class="lock-close"></div>
+									</div>
+								</div>
+							</div>
+							<div class="preset-position">
+								<div class="init-preset">
+									<p>
+										<span>初始预置位</span>
+										<select>
+											<option>1</option>
+											<option>2</option>
+										</select>
+										<button class="but-style">召唤</button>
+									</p>
+								</div>
+								<div class="set-preset">
+									<p>
+										<span>设置预置位</span>
+										<select>
+											<option>1</option>
+											<option>2</option>
+										</select>
+										<button class="but-style">加</button>
+									</p>
+								</div>
+								<div class="del-preset">
+									<p>
+										<span>删除预置位</span>
+										<select>
+											<option>1</option>
+											<option>2</option>
+										</select>
+										<button class="but-style">删除</button>
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="live-bottom">
+					<div class="news-info-text-icon-box">
+						<div class="news-info-text-content">未戴口罩</div>
+					</div>
+					<p>
+						<span class="news-info-title">告警消息</span>
+						<span>更多</span>
+					</p>
+					<ul class="news-box">
+						<li>
+							<div class="news-list-left">
+								<div class="news-icon">
+									<img src="../image/icon/behavior-icon.png" alt="">
+								</div>
+								<div class="news-name">
+									<p>设备名称</p>
+									<p>RG-N18010</p>
+								</div>
+								<div class="news-detailedinfo">
+									<p>2020-10-22 19:22:10</p>
+									<p>
+										<span>报警等级</span>
+										<span>紧急</span>
+									</p>
+								</div>
+							</div>
+
+							<div class="news-list-right">
+								<div class="news-but">
+									<div></div>
+									<div class="handle-but"></div>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class=" news-list-left ">
+								<div class="news-icon ">
+									<img src="../image/icon/face-icon.png " alt=" ">
+								</div>
+								<div class="news-name ">
+									<p>设备名称</p>
+									<p>RG-N18010</p>
+								</div>
+								<div class="news-detailedinfo ">
+									<p>2020-10-22 19:22:10</p>
+									<p>
+										<span>报警等级</span>
+										<span>紧急</span>
+									</p>
+								</div>
+							</div>
+
+							<div class="news-list-right ">
+								<div class="news-but ">
+									<div></div>
+									<div class="handle-but"></div>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="news-list-left ">
+								<div class="news-icon ">
+									<img src="../image/icon/car-icon.png " alt=" ">
+								</div>
+								<div class="news-name ">
+									<p>设备名称</p>
+									<p>RG-N18010</p>
+								</div>
+								<div class="news-detailedinfo ">
+									<p>2020-10-22 19:22:10</p>
+									<p>
+										<span>报警等级</span>
+										<span>紧急</span>
+									</p>
+								</div>
+							</div>
+
+							<div class="news-list-right ">
+								<div class="news-but ">
+									<div></div>
+									<div class="handle-but"></div>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="news-list-left ">
+								<div class="news-icon ">
+									<img src="../image/icon/behavior-icon.png " alt=" ">
+								</div>
+								<div class="news-name ">
+									<p>设备名称</p>
+									<p>RG-N18010</p>
+								</div>
+								<div class="news-detailedinfo ">
+									<p>2020-10-22 19:22:10</p>
+									<p>
+										<span>报警等级</span>
+										<span>紧急</span>
+									</p>
+								</div>
+							</div>
+
+							<div class="news-list-right ">
+								<div class="news-but ">
+									<div></div>
+									<div class="handle-but"></div>
+								</div>
+							</div>
+						</li>
+					</ul>
+					<div class="news-info ">
+						<p>
+							<span>告警类型</span>
+							<span>告警级别</span>
+						</p>
+						<p>
+
+							<span>人脸检测</span>
+							<span class="level">严重</span>
+						</p>
+						<p style="margin-top: 16px;">
+							<span>设备名称</span>
+							<span>IP地址</span>
+
+						</p>
+						<p>
+							<span>1号摄像机</span>
+							<span>192.168.11.234</span>
+						</p>
+						<p style="margin-top: 16px;">
+							<span>IP地址</span>
+						</p>
+						<p>
+							<span>2020-10-20 19-23-12</span>
+						</p>
+						<p style="margin-top: 16px;font-size: 14px;">处置意见</p>
+						<textarea class="changepinion" rows="6 " cols="46"></textarea>
+						<div class="news-info-but-box">
+							<div>
+								<div class="news-cancel-btn "></div>
+								<div class="news-determine-btn "></div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="polling" class="div_page">
+				<div class="polling-top">
+					<div style="height: 62px;"></div>
+					<div class="polling-set">
+						<div>
+							<span>组轮询时间间隔</span>
+							<input class="public_input" type="text">
+							<button onClick="openAddPollingPage()"></button>
+						</div>
+					</div>
+					<div class="polling-list">
+						<div>
+							<p>
+								<span class="layui-icon layui-icon-triangle-d"></span>
+								<span>轮询组列表</span>
+							</p>
+							<ul>
+								<li class="layui-row">
+									<span class="layui-icon layui-icon-triangle-r"></span>
+									<span class="group-name">重点部位轮询组</span>
+									<span ><input type="checkbox"></span>
+									<span class="layui-icon layui-icon-edit"></span>
+									<span class="layui-icon layui-icon-delete"></span>
+								</li>
+								<li class="layui-row">
+									<span class="layui-icon layui-icon-triangle-r"></span>
+									<span class="group-name">重点部位轮询组</span>
+									<span ><input type="checkbox"></span>
+									<span class="layui-icon layui-icon-edit"></span>
+									<span class="layui-icon layui-icon-delete"></span>
+								</li>
+								<li class="layui-row">
+									<span class="layui-icon layui-icon-triangle-r"></span>
+									<span class="group-name">重点部位轮询组</span>
+									<span ><input type="checkbox"></span>
+									<span class="layui-icon layui-icon-edit"></span>
+									<span class="layui-icon layui-icon-delete"></span>
+								</li>								
+							</ul>
+						</div>
+	
+					</div>
+					<div class="polling-start-button">
+						<button>开始轮训</button>
+					</div>
+				</div>
+
+				<div class="polling-bottom">
+					<p class="icon-title icon-title-pl">
+						<span class="icon-title-icon"></span>
+						<span class="icon-title-text">轮训组详情</span>
+					</p>
+					<div class="polling-table-box">
+						<table id="polling-table"></table>
+					</div>
+				</div>
+			</div>
+			<!-- 录像 -->
+			<div id="window" class="div_page">
+				<div class="videotape-top">
+					<div style="border:none;height: 62px;"></div>
+					<p class="div_page_top_title">资源列表</p>
+					<ul class="cameraList">
+					</ul>
+				</div>
+				<div class="videotape-bottom">
+					<ul class="videotape-title">
+						<li class="videotape-title-item videotape-choice">文件列表</li>
+						<li class="videotape-title-item">录像计划</li>
+					</ul>
+					<div class="videotape-box">
+					<div class="videotape-item videotape-show">
+						<p class="icon-title">
+							<span class="icon-title-icon"></span>
+							<span class="icon-title-text">录像检索</span>
+						</p>
+						<div class="videotape-form">
+							<div class="videotape-form-line">
+								<div class="videotape-form-left">
+									<span>摄像机名称</span>
+									<input type="text">
+								</div>
+								<div class="videotape-form-right">
+									<span>录像类型</span>
+									<select>
+										<option>全部</option>
+									</select>
+								</div>
+							</div>
+							<div class="videotape-form-line">
+								<div class="videotape-form-left">
+									<span>开始时间</span>
+									<input type="text" class="layui-input" id="test5" placeholder="yyyy-MM-dd HH:mm:ss">
+								</div>
+								<div class="videotape-form-right">
+									<span>结束时间</span>
+									<input type="text" class="layui-input" id="test6" placeholder="yyyy-MM-dd HH:mm:ss">
+								</div>
+							</div>
+							<div class="videotape-form-line">
+								<div class="videotape-form-left">
+									<span>本地文件</span>
+									<input type="text">
+								</div>
+							</div>
+							<div class="videotape-form-but-box">
+								<div class="videotape-form-but-empty">清空</div>
+								<div class="videotape-form-but-retrieval">检索</div>
+							</div>
+						</div>
+						<p class="icon-title">
+							<span class="icon-title-icon"></span>
+							<span class="icon-title-text">文件列表</span>
+						</p>
+						<div class="videotape-table">
+							<table id="video-table"></table>
+						</div>
+					</div>
+					<div class="videotape-item">
+						<p class="icon-title">
+							<span class="icon-title-icon"></span>
+							<span class="icon-title-text">录像选项</span>
+						</p>
+						<div class="video-plan-box">
+							<div class="video-plan">
+								<span>摄像机名称</span>
+								<input type="text">
+							</div>
+							<div class="video-plan">
+								<span>平台录像时长</span>
+								<input type="text" class="layui-input" id="test7" placeholder="yyyy-MM-dd HH:mm:ss">
+								<div class="video-plan-button"   >开始录像</div>
+							</div>
+							<div class="video-plan">
+								<span>前端录像时长</span>
+								<input type="text" class="layui-input" id="test8" placeholder="yyyy-MM-dd HH:mm:ss">
+								<div class="video-plan-button" >开始录像</div>
+							</div>
+							<div class="video-plan">
+								<span>本地录像路劲</span>
+								<div>
+									<input type="text">
+									<button>浏览</button>
+								</div>
+								<div class="video-plan-button">开始录像</div>
+							</div>
+						</div>
+						<p class="icon-title">
+							<span class="icon-title-icon"></span>
+							<span class="icon-title-text">录像任务列表</span>
+						</p>
+						<div class="video-plan-table">
+							<table id="video-plan-table"></table>
+						</div>
+					</div>
+
+					</div>
+				</div>
+			</div>
+			<!-- 对讲广播-->
+			<div id="live " class="div_page ">
+				<div style="visibility: hidden; ">
+					<!-- <input id="protocolType " type="hidden " value="2">
+					<input id="streamType " type="hidden " value="1">
+					<input id="direstFirst " type="hidden " value="1">
+					<input id="multi " type="hidden " value="0"> -->
+				</div>
+				<div class="audio-top ">
+					<div style="border:none;height: 62px; "></div>
+					<p class="icon-title icon-title-pl">
+						<span class="icon-title-icon"></span>
+						<span class="icon-title-text">对讲</span>
+					</p>
+					<div class="Intercom-set-box">
+						<ul class="Intercom-set">
+							<li >
+								<span>媒体参数</span>
+								<input type="text">
+							</li>
+							<li>
+								<span>音频设备</span>
+								<input type="text">
+							</li>
+							<li>
+								<span>对话句柄</span>
+								<input type="text">
+							</li>
+						</ul>
+					</div>
+					<div class="microphone">
+						<img src="../image/icon/microphone.png" alt="">
+					</div>
+					<!-- <div>
+						<span id="talkParamLbl " style="display:inline-block; width:120px; ">媒体参数</span>
+						<input type="text " id="talkparam " style="width:500px; "><br>
+						<span id="talkCode " style="display:inline-block; width:120px; ">音频设备</span>
+						<input type="text " id="talkcameracode " style="width:500px; "><br>
+						<span id="talkHandle " style="display:inline-block; width:120px; ">对讲句柄</span>
+						<input type="text " id="handle " readonly="readonly ">
+						<br>
+						<input id="startTalkBtn " type="button " value="开始语音对讲 " onClick="startVoiceTalkback() ">
+						<input id="stopTalkBtn " type="button " value="停止语音对讲 " onClick="stopVoiceTalkback() ">
+					</div> -->
+				</div>
+				<div class="audio-bottom ">
+					<p class="icon-title icon-title-bottom-line icon-title-pl">
+						<span class="icon-title-icon"></span>
+						<span class="icon-title-text">广播</span>
+					</p>
+					<div class="radiobroadcast-top">
+						<div class="radiobroadcast-top-item">
+							<span>广播摄像机编码</span>
+							<input type="text">
+						</div>
+						<div class="radiobroadcast-top-button-box">
+							<span>添加广播摄像机</span>
+							<span>删除广播摄像机</span>
+							<span>获取广播摄像机列表</span>
+						</div>
+						<div class="microphone radiobroadcast-top-microphone">
+							<img src="../image/icon/microphone.png" alt="">
+						</div>
+					</div>
+					<div class="radiobroadcast-bottom">
+						<div class="radiobroadcast-bottom-item">
+							<span>文件夹</span>
+							<input type="text">
+							<button>浏览</button>
+						</div>
+						<div class="radiobroadcast-bottom-item" style="margin-top: 20px;">
+							<span>循环类型</span>
+							<select>
+								<option>循环</option>
+								<option>不循环</option>
+							</select>
+						</div>
+						<div class="microphone radiobroadcast-top-microphone">
+							<img src="../image/icon/microphone.png" alt="">
+						</div>
+					</div>
+					<!-- <div>
+						<span id="broadcastCode " style="display:inline-block; width:120px; ">广播摄像机编码</span>
+						<input type="text " id="broadcameracode " style="width:500px; ">
+						<br>
+						<input id="addBroadcastDeviceBtn " type="button " value="添加广播摄像机 " onClick="addBroadcastDevice() ">
+						<input id="deleteBroadcastDeviceBtn " type="button " value="删除广播摄像机 " onClick="deleteBroadcastDevice() ">
+						<input id="getBroadcastDeviceBtn " type="button " value="获取广播摄像机列表 " onClick="getBroadcastDevice() ">
+						<br>
+						<span style="display:inline-block; width:120px; "> </span>
+						<div id="cameracodelist " style="display:inline-block; width:500px; "></div>
+						<br>
+						<input id="startRealBroadcastBtn " type="button " value="开始语音广播 " onClick="startRealBroadcast() ">
+						<input id="stopRealBroadcastBtn " type="button " value="停止语音广播 " onClick="stopRealBroadcast() ">
+						<br>
+						<span id="voiceFileLbl " style="display:inline-block; width:120px; ">文件名</span>
+						<input type="file " id="voicefile " style="width: 500px; "><br>
+						<span id="cycleTypeLbl " style="display:inline-block; width:120px; ">循环类型</span>
+						<select id="cycletype ">
+								<option value="0 " id="cycletype0 ">不循环</option>
+								<option value="1 " id="cycletype1 ">循环</option>
+							</select>
+						<br>
+						<input id="startFileBroadcastBtn " type="button " value="开始文件广播 " onClick="startFileBroadcast() ">
+						<input id="stopFileBroadcastBtn " type="button " value="停止文件广播 " onClick="stopFileBroadcast() ">
+					</div> -->
+				</div>
+
+
+			</div>
+			<!-- 下载猪排 -->
+			<div id="video " class="div_page ">
+				<div class="download-top ">
+					<div style="border:none;height: 62px; "></div>
+					<div class="setWindowToolBox ">
+						<p class="icon-title ">
+							<span class="icon-title-icon"></span>
+							<span class="icon-title-text">窗格设置</span>
+						</p>
+						<div class="tool-content ">
+							<p class="row ">
+								<span class="col">
+										<input type="checkbox" id="tool_SNAPSHOT " value="0x00000001 ">
+										<span id="tool01 ">抓拍</span>
+								</span>
+								<span class="col">
+										<input type="checkbox" id="tool_LOCAL_RECORD " value="0x00000002 ">
+										<span id="tool02 ">本地录像</span>
+								</span>
+								<span class="col">
+										<input type="checkbox" id="tool_BOOKMARK " value="0x00000004 ">
+										<span id="tool03 ">书签</span>
+								</span>
+							</p>
+							<p class="row ">
+								<span class="col">
+										<input type="checkbox" id="tool_ZOOM " value="0x00000008 ">
+										<span id="tool04 ">局部放大</span>
+								</span>
+								<span class="col">
+										<input type="checkbox" id="tool_PLAY_RECORD " value="0x00000010 ">
+										<span id="tool05 ">即时回放</span>
+								</span>
+								<span class="col">
+										<input type="checkbox" id="tool_PLAY_SOUND " value="0x00000020 ">
+										<span id="tool06 ">声音</span>
+								</span>
+							</p>
+							<p class="row ">
+								<span class="col">
+										<input type="checkbox" id="tool_TALKBACK " value="0x00000040 ">
+										<span id="tool07 ">对讲</span>
+								</span>
+								<span class="col">
+										<input type="checkbox" id="tool_VIDEO_TVW " value="0x00000080 ">
+										<span id="tool08 ">视频上墙</span>
+								</span>
+								<span class="col">
+										<input type="checkbox" id="tool_ALARM_WIN " value="0x00000100 ">
+										<span id="tool09 ">设置告警窗口</span>
+								</span>
+							</p>
+							<p class="row ">
+								<span class="col">
+										<input type="checkbox" id="tool_PTZ " value="0x00000200 ">
+										<span id="tool10 ">云镜控制</span>
+								</span>
+								<span class="col">
+										<input type="checkbox" id="tool_IA " value="0x00000400 ">
+										<span id="tool11 ">叠加智能分析</span>
+								</span>
+								<span class="col">
+										<input type="checkbox" id="tool_OPEN_MAP " value="0x00000800 ">
+										<span id="tool12 ">打开电子地图</span>
+								</span>
+							</p>
+							<p class="row ">
+								<span class="col">
+										<input type="checkbox" id="tool_WINDOW_MAIN " value="0x00001000 ">
+										<span id="tool13 ">一主多辅</span>
+								</span>
+								<span>
+										<input type="checkbox" id="tool_PLAY_QUALITY " value="0x00002000 ">
+										<span id="tool14 ">网速优先/画质优先</span>
+								</span>
+							</p>
+							<p class="foot ">
+								<input id="setToolbarBtn" type="button" value="设置工具栏" onClick="setToolbar();">
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="download-center">
+					<p class="icon-title icon-title-bottom-line icon-title-pl">
+						<span class="icon-title-icon"></span>
+						<span class="icon-title-text">下载</span>
+					</p>
+					<div class="download-center-save-box">
+						<div class="download-center-save">
+							<span>保存路劲</span>
+							<input type="text">
+							<button>浏览</button>
+						</div>
+					</div>
+					<div class="download-center-button-box" >
+						<button>保存</button>
+					</div>
+					<!-- <p>下载</p>
+					<div>
+						<span id="downloadParamLbl " style="display:inline-block; width:120px; ">下载参数</span>
+						<input type="text " id="downloadparam " style="width: 500px; ">
+						<br>
+						<span id="downloadCode " style="display:inline-block; width:120px; ">摄像机编码</span>
+						<input type="text " id="downloadcameracode " style="width: 500px; " value="06534976427990260101#9cb98dc30166406a9b2309f432f801bc ">
+						<br>
+						<span id="downloadSavePath " style="display:inline-block; width:120px; ">保存文件路径</span>
+						<input type="text " id="downloadfilePath " style="width: 500px; ">
+						<br>
+						<span id="starttimeLbl " style="display:inline-block; width:120px; ">开始时间</span>
+						<input type="text " id="starttime " value="20200120000000 " title="时间格式为yyyyMMddHHmmss ">
+						<span id="endtimeLbl " style="display:inline-block; width:120px; ">结束时间</span>
+						<input type="text " id="endtime " value="20200120010000 " title="时间格式为yyyyMMddHHmmss ">
+						<br>
+						<span id="downloadhandleLbl " style="display:inline-block; width:120px; ">下载句柄</span>
+						<input type="text " id="downloadhandle " readonly="readonly ">
+						<br>
+						<input id="startPlatDownBtn " type="button " value="开始平台下载 " onClick="startDownload(0) ">
+						<input id="startPUDownBtn " type="button " value="开始前端下载 " onClick="startDownload(1) ">
+						<input id="stopPlatDownBtn " type="button " value="停止平台下载 " onClick="stopDownload(0) ">
+						<input id="stopPUDownBtn " type="button " value="停止前端下载 " onClick="stopDownload(1) ">
+						<input id="pauseBtn " type="button " value="暂停下载 " onClick="downloadPause() ">
+						<input id="resumeBtn " type="button " value="继续下载 " onClick="downloadResume() ">
+						<br>
+						<span id="downloadinfoLbl " style="display:inline-block; width:120px; ">下载信息</span>
+						<textarea id="downloadinfo " style="width: 500px;height: 100px; "></textarea>
+						<input id="getDonwloadinfoBtn " type="button " value="获取下载信息 " onClick="getDownloadInfo() ">
+					</div> -->
+				</div>
+				<div class="download-bottom ">
+					<p class="icon-title icon-title-bottom-line icon-title-pl">
+						<span class="icon-title-icon"></span>
+						<span class="icon-title-text">抓拍</span>
+					</p>
+					<div class="capture">
+						<div>
+							<div class="capture-path">
+								<span>抓拍文件路劲</span>
+								<input type="text">
+								<button>浏览</button>
+							</div>
+							<div class="capture-type">
+								<span >循环类型</span>
+								<select>
+									<option>JPG</option>
+								</select>
+								<button>本地单张拍照</button>
+							</div>
+						</div>
+					</div>
+					<div class="capture-button-box" >
+						<button>保存</button>
+					</div>
+					
+					<!-- <p>抓拍</p>
+					<div>
+						<span id="picPath " style="display:inline-block; width:120px; ">抓拍文件路径</span>
+						<input type="text " id="snapshotpath " style="width: 500px; ">
+						<br>
+						<span id="picWnd " style="display:inline-block; width:120px; ">窗格ID</span>
+						<input type="text " id="snapshotwnd ">
+						<span id="picFormat " style="display:inline-block; width:120px; ">图片格式</span>
+						<select id="snapshotformat ">
+								<option value="1 " selected="selected ">JPG</option>
+								<option value="2 ">BMP</option>
+							</select>
+						<input id="picBtn " type="button " value="本地单张抓拍 " onClick="localSnapshot() ">
+					</div> -->
+				</div>
+			</div>
+			<div id="addOrEditPolling">
+				<p class="icon-title icon-title-pl icon-title-bottom-line">
+					<span class="icon-title-icon"></span>
+					<span class="icon-title-text">添加轮训组</span>
+				</p>
+				<div class="setPollinInfo">
+					<ul>
+						<li>
+							<span>组名称</span>
+							<input class="public_input" type="text">
+						</li>
+						<li>
+							<span>轮询时间间隔</span>
+							<input class="public_input" type="text">
+						</li>
+					</ul>
+				</div>
+				<p class="resources-title">
+					<span>资源列表</span>
+				</p>
+				<div class="resources-list">
+					<div class="tree-box">
+						<div id="testtree1" class="demo-tree demo-tree-box"></div>
+					</div>
+				</div>
+				<div class="resources-camera-list">
+					<div>
+						<table>
+							<thead>
+								<tr>
+									<th>摄像机</th>
+									<th>播放窗口</th>
+									<th>操作</th>
+								  </tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>镜头1</td>
+									<td>
+										<select>
+											<option>1</option>
+											<option>2</option>
+											<option>3</option>
+										</select>
+									</td>
+									<td>
+										<span class="layui-icon layui-icon-delete"></span>
+									</td>
+								</tr>
+								<tr>
+									<td>镜头1</td>
+									<td>
+										<select>
+											<option>1</option>
+											<option>2</option>
+											<option>3</option>
+										</select>
+									</td>
+									<td>
+										<span class="layui-icon layui-icon-delete"></span>
+									</td>
+								</tr>
+								<tr>
+									<td>镜头1</td>
+									<td>
+										<select>
+											<option>1</option>
+											<option>2</option>
+											<option>3</option>
+										</select>
+									</td>
+									<td>
+										<span class="layui-icon layui-icon-delete"></span>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="resources-camera-list-button">
+					<p >
+						<button >取消</button>
+						<button >保存</button>
+					</p>
+				</div>
+			</div>
+			<!-- 语音对讲和广播 -->
+			<div id="voice " class="div_page " style="display: none; ">
+				<div style="border:none;height: 62px; "></div>
+			</div>
+
+			<!-- 抓拍与录像下载 -->
+			<div id="download " class="div_page " style="display: none; ">
+				<div style="border:none;height: 62px; "></div>
+			</div>
+		</div>
+	</div>
+		<div id="right">
+			<div class="right-top">
+				<div style="width: 50px;float: left;height: 40px; ">
+					<button onClick="setFullScreen()" class="fullscreen-but"></button>
+				</div>
+				<div style="width: 25px;float: left;">
+					<button class="layout-but"></button>
+				</div>
+				<div class="layout-style ">
+					<ul>
+						<li onClick="setLayout(1); ">单画面</li>
+						<li onClick="setLayout(4); ">4画面</li>
+						<li onClick="setLayout(6); ">6画面</li>
+						<li onClick="setLayout(9); ">9画面</li>
+					</ul>
+				</div>
+				<div class="scaleBtnBox ">
+					<button onClick="setScale(1) " >原始比例</button>
+					<button onClick="setScale(2) " >铺满窗格</button>
+				</div>
+			</div>
+			<div class="right-bottom">
+				<object
+					id="ocx"
+					classid="CLSID:3556A474-8B23-496F-9E5D-38F7B74654F4"
+					codebase="../ocx/IVS_OCX.cab#version=2,2,0,36"> 
+				</object>
+		</div>
+		</div>
+	</div>
+
+</body>
+</html>
+<script language="javascript" for="ocx" event="IVS_OCX_Event(MSG_TYPE,data)">
+	 var xmlDoc = $.parseXML(data);
+	xmlDoc = $(xmlDoc);
+	 
+	$("#eventType").val("IVS_OCX_Event:" +MSG_TYPE);
+		  
+</script>
+<script language="javascript" for="ocx" event="IVS_OCX_Windows_Event(MSG_TYPE,data)">
+	 var xmlDoc = $.parseXML(data);
+	xmlDoc = $(xmlDoc);
+	 
+	$("#eventType").val("IVS_OCX_Windows_Event:" +MSG_TYPE);	  
+</script>
+<script>
+    layui.use('laydate', function() {
+        var laydate = layui.laydate;
+        //日期时间选择器
+        laydate.render({
+            elem: '#test5',
+            type: 'datetime'
+        });
+        laydate.render({
+            elem: '#test6',
+            type: 'datetime'
+		});
+		laydate.render({
+            elem: '#test7',
+            type: 'datetime'
+        });
+        laydate.render({
+            elem: '#test8',
+            type: 'datetime'
+        });
+    })
+    layui.use('table', function() {
+        var table = layui.table;
+        table.render({
+            elem: '#video-table',
+            width: 480,
+            cols: [
+                [ //标题栏
+                    {
+                        field: 'id',
+                        title: 'ID',
+
+                    }, {
+                        field: 'username',
+                        title: '用户名',
+
+                    }, {
+                        field: 'email',
+                        title: '邮箱',
+
+                    }, {
+                        field: 'sign',
+                        title: '签名',
+
+                    }, {
+                        field: 'city',
+                        title: '签名',
+
+                    }
+                ]
+            ],
+            data: [{
+                "id ": "10001 ",
+                "username ": "杜甫 ",
+                "email ": "xianxin@layui.com ",
+                "sex ": "男 ",
+                "city ": "浙江杭州 ",
+                "sign ": "人生恰似一场修行 ",
+
+            }, {
+                "id ": "10002 ",
+                "username ": "李白 ",
+                "email ": "xianxin@layui.com ",
+                "sex ": "男 ",
+                "city ": "浙江杭州 ",
+                "sign ": "人生恰似一场修行 ",
+
+            }, {
+                "id ": "10003 ",
+                "username ": "王勃 ",
+                "email ": "xianxin@layui.com ",
+                "sex ": "男 ",
+                "city ": "浙江杭州 ",
+                "sign ": "人生恰似一场修行 ",
+            }]
+        });
+	});
+	layui.use('table', function() {
+        var table = layui.table;
+        table.render({
+            elem: '#video-plan-table',
+            width: 480,
+            cols: [
+                [ //标题栏
+                    {
+                        field: 'id',
+                        title: 'ID',
+
+                    }, {
+                        field: 'username',
+                        title: '用户名',
+
+                    }, {
+                        field: 'email',
+                        title: '邮箱',
+
+                    }, {
+                        field: 'sign',
+                        title: '签名',
+
+                    }, {
+                        field: 'city',
+                        title: '签名',
+
+                    }
+                ]
+            ],
+            data: []
+        });
+    });
+	layui.use('table', function() {
+        var table = layui.table;
+        table.render({
+            elem: '#polling-table',
+            width: 480,
+            cols: [
+                [ //标题栏
+                    {
+                        field: 'id',
+                        title: 'ID',
+
+                    }, {
+                        field: 'username',
+                        title: '用户名',
+
+                    }, {
+                        field: 'email',
+                        title: '邮箱',
+
+                    }, {
+                        field: 'sign',
+                        title: '签名',
+
+                    }, {
+                        field: 'city',
+                        title: '签名',
+
+                    }
+                ]
+            ],
+            data: []
+        });
+    });
+	window.onload = function() {
+        setInit()
+        $(".tool-content checkbox ").attr("checked ") == " ";
+    }
+</script>

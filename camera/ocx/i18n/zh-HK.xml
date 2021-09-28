@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Content>
+	<Rect>矩形</Rect>
+	<Polygon>多邊形</Polygon>
+	<Delete>刪除</Delete>
+	<DisplayMode>調整佈局</DisplayMode>
+	<Play>播放</Play>
+	<Stop>停止</Stop>
+	<SnapShot>抓拍 (截圖)</SnapShot>
+	<LocalRecord>本地錄像(本地錄影)</LocalRecord>
+	<PlayRecord>快速播放</PlayRecord>
+	<BookMark>書籤</BookMark>
+	<Zoom>局部放大</Zoom>
+	<PTZ>全方位雲台控制</PTZ>
+	<PlaySound>放音</PlaySound>
+	<PlayNoSound>靜音</PlayNoSound>
+	<TalkBack>對講</TalkBack>
+	<NoTalkBack>對講</NoTalkBack>
+	<VideoTVW>視像上墻</VideoTVW>
+	<AlarmWin>配置告警版</AlarmWin>
+	<OpenMap>打開電子地圖</OpenMap>
+	<WindowMain>調整實況佈局</WindowMain>
+	<IA>顯示更多智能分析結果</IA>
+	<PlayQuality>畫質優先</PlayQuality>
+	<PlayNet>網速優先</PlayNet>
+	<Extend>打開</Extend>
+	<Retracted>收起</Retracted>
+	<PTZ3D>3D定位</PTZ3D>
+	<ReConnecting>視屏墻信號重連中</ReConnecting>
+	<Off>關閉</Off>
+	<Info>視頻信息</Info>
+	<ZoomIn>放大</ZoomIn>
+	<ZoomOut>縮小</ZoomOut>
+	<ZoomOver>停用</ZoomOver>
+	<TVWallVideoBroken>視頻流連接中斷</TVWallVideoBroken>
+	<TVWallDecDisconn>解碼器連接有斷,重新連接中</TVWallDecDisconn>
+	<TVWallHandling>視像放映中</TVWallHandling>
+	<TVWallOK>視像已上墻</TVWallOK>
+	<WatermarkGary>無加密水印</WatermarkGary>
+	<WatermarkNomal>附加密水印</WatermarkNomal>
+	<TrunCuise>視像輪巡中</TrunCuise>
+	<SingleFrameStatus>單幅播放中</SingleFrameStatus>
+	<AlarmStatus>有告警</AlarmStatus>
+	<RecordStatus>手動錄影</RecordStatus>
+	<CruiseTrackStatus>巡邏中</CruiseTrackStatus>
+	<TvWalling>視像放映中</TvWalling>
+	<TVWallReConnect>視屏墻信號重連中</TVWallReConnect>
+</Content>

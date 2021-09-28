@@ -1,0 +1,5 @@
+@echo off 
+cd /d %~dp0
+regsvr32 IVS_OCXPlayer.ocx
+exit
+

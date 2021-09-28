@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body style="margin:0;">
+    <!-- <iframe src="www.baidu.com" width="100%" height="100%" frameborder="0"></iframe> -->
+    <!-- <script src="https://cdn.bootcdn.net/ajax/libs/moment.js/2.29.1/locale/br.js"></script> -->
+    <script type="text/javascript" src="../js/moment.js"></script>
+
+<script>
+    // 时间数组表示每个多少秒执行一次
+    // let arr = [4, 4];
+    // let data = ['张三', '李四'];
+
+    // function bb(item) {
+    //     let b = 0
+    //     let timer1 = setInterval(function () {
+    //         if (b ==2) {
+    //             b = 0;
+    //         }
+
+    //         console.log(new Date());
+    //         console.log('b的值是'+b);
+    //         b++;
+    //     }, 2 * 1000);
+    //     setTimeout(function () {
+    //         clearInterval(timer1);
+    //     }, 4000)
+    // };
+
+    // function groupLoop(arr, data) {
+    //     for (let i = 0; i < arr.length; i++) {
+    //         // console.log(_this);
+    //         (function () {
+    //             let total = i == 0 ? arr[i] : 0;
+
+    //             if (i != 0) {
+    //                 for (let n = 0; n <= i; n++) {
+    //                     total = total + arr[n]
+    //                 }
+    //             }
+    //             setTimeout(function () {
+    //                 if (i == arr.length - 1) {
+    //                     groupLoop(arr,data)
+    //                 }
+    //                 // console.log(data[i]);
+    //                 bb(data[i])
+    //             }, (total) * 1000)
+    //         })()
+
+    //     }
+    // }
+    let str ="01:10"
+    let str1 ="13:20"
+    // var timestamp = Date.parse(str);
+    // groupLoop(arr, data)
+    let arr=["00:12-09:20"]
+    function testTime(s,e,arr){
+        if(arr.length){
+            let D="2020-12-12"
+            s=D+s;
+            e=D+s;
+            for (let i = 0; i < arr.length; i++) {
+                // let s
+                
+            }
+
+        }
+
+
+
+    }
+
+        console.log(moment(str).valueOf());
+        console.log(moment(str1).valueOf());
+// str = str.replace(/:/g,"")
+// console.log(str);
+    
+
+
+
+
+    // function findNum(a) {
+    //     var result = [0, 0];
+    //     var arr = [];
+    //     for (var i = 0; i < a.length; i++) {
+    //         for (var j = 0, count = 0; j < a.length; j++) {
+    //             if (a[i].pane == a[j].pane) {
+    //                 ++count;
+    //             };
+    //         };
+    //         if (count > result[0]) {
+    //             result[0] = count;
+    //             result[1] = a[i].pane;
+    //         } else if (count == result[0].pane && result[1] < a[i].pane) {
+    //             result[1] = a[i];
+    //         }
+
+    //     }
+    //     // console.log("数"+result[1]+"重复了最多次，为"+result[0]);
+    //     arr[0] = result[1];
+    //     arr[1] = result[0];
+    //     return arr
+    // }
+
+
+
+
+    // arr1= [
+    // {pane: "1", aliasName: "客厅", equipmentCoding: "02023659560960320101#3df31e34be9f404899f387923ec6e5b4"},
+    // {pane: "3", aliasName: "192.168.1.235", equipmentCoding: "02023659569979110101#3df31e34be9f404899f387923ec6e5b4"}
+    // ]
+
+
+    // arr2= [
+    // {pane: "1", aliasName: "客厅", equipmentCoding: "02023659560960320101#3df31e34be9f404899f387923ec6e5b4"},
+    // {pane: "3", aliasName: "192.168.1.235", equipmentCoding: "02023659569979110101#3df31e34be9f404899f387923ec6e5b4"}
+    // ]
+
+
+
+
+    // var arr = [1, 2, 3, 1, 1, 2, 3, 4];
+    // var findRepeatNumber = function (nums) {
+    //     var number = new Array;
+    //     var obj = [];
+    //     nums = nums.sort();
+    //     for (let i = 0, count = 0; i <= nums.length; i++) {
+    //         if (nums[i] == nums[i - 1]) {
+    //             count++
+    //             number.push(
+    //                 nums[i - 1]
+    //             );
+    //         }
+    //     }
+    //     let newarr1 = [];
+    //     for (var i = 0; i < number.length; i++) {
+    //         if (newarr1.indexOf(number[i]) == -1) {
+    //             newarr1.push(number[i])
+    //         }
+    //     }
+    //     let c = number.concat(newarr1).sort();
+    //     return c;
+
+    // };
+    // console.log(findRepeatNumber(arr));
+    // let data = [
+    //     { pane: "1", aliasName: "a", equipmentCoding: "111" },
+    //     { pane: "3", aliasName: "b", equipmentCoding: "333" },
+    //     { pane: "1", aliasName: "a1", equipmentCoding: "111" },
+    //     { pane: "1", aliasName: "a2", equipmentCoding: "111" },
+    //     { pane: "2", aliasName: "d", equipmentCoding: "222" },
+    //     { pane: "2", aliasName: "d1", equipmentCoding: "222" },
+    //     { pane: "4", aliasName: "e", equipmentCoding: "444" }
+    // ]
+
+
+    // let arr1 = [
+    //     [
+    //         { pane: "1", aliasName: "a", equipmentCoding: "111" },
+    //         { pane: "3", aliasName: "b", equipmentCoding: "333" },
+    //         { pane: "2", aliasName: "d", equipmentCoding: "222" },
+    //         { pane: "4", aliasName: "e", equipmentCoding: "444" }
+    //     ],
+    //     [
+    //         { pane: "3", aliasName: "b", equipmentCoding: "333" },
+    //         { pane: "1", aliasName: "a1", equipmentCoding: "111" },
+    //         { pane: "2", aliasName: "d1", equipmentCoding: "222" },
+    //         { pane: "4", aliasName: "e", equipmentCoding: "444" }
+    //     ],
+    //     [
+    //         { pane: "3", aliasName: "b", equipmentCoding: "333" },
+    //         { pane: "1", aliasName: "a2", equipmentCoding: "111" },
+    //         { pane: "2", aliasName: "d", equipmentCoding: "222" },
+    //         { pane: "4", aliasName: "e", equipmentCoding: "444" }
+    //     ]
+
+    // ];
+    // var _arr = ['旅行箱', '旅行箱', '小米', '大米', '大米', '大米', '大米'];
+    // function filterData(data) {
+    //     var _res = []; // 
+    //     function sortData(a, b) {
+    //         return a.pane - b.pane
+    //     }
+    //     data.sort(sortData);
+    //     for (var i = 0; i < data.length;) {
+    //         var count = 0;
+    //         for (var j = i; j < data.length; j++) {
+    //             if (data[i].pane == data[j].pane) {
+    //                 count++;
+    //             }
+    //         }
+    //         _res.push([data[i].pane, count]);
+    //         i += count;
+    //     }
+    //     //_res 二维数维中保存了 值和值的重复数
+    //     var _newArr = [];
+
+    //     for (var i = 0; i < _res.length; i++) {
+    //         _newArr.push(
+    //             {
+    //                 num: _res[i][0],
+    //                 count: _res[i][1]
+    //             }
+    //         );
+    //     }
+    //     console.log(_newArr);
+    //     return _newArr
+
+    // }
+
+    // let repeatData = filterData(data);
+
+
+    // let arrorarr = [];
+    // for (let i = 0; i < 3; i++) {
+    //     arrorarr.push([]);
+    //     for (let j = 0; j < data.length; j++) {
+    //         arrorarr[i].push(
+    //             data[j]
+    //         )
+    //     }
+    // };
+    // for (let i = 0; i < arrorarr.length; i++) {
+    //     for (let j = 0; j < arrorarr[i].length; j++) {
+    //         for (let n = 0; n < repeatData.length; n++) {
+
+
+    //         }
+
+    //     }
+
+    // }
+    // console.log(arrorarr);
+
+
+
+
+    // function handlerTime(arr) {
+    //     for (let i = 0; i < arr.length; i++) {
+    //         let total = i == 0 ? arr[i] : 0;
+    //         if (i != 0) {
+    //             for (let n = 0; n <= i; n++) {
+    //                 total = total + arr[n]
+    //             }
+    //         }
+
+    //         setTimeout(function () {
+    //             if (i == arr.length - 1) {
+    //                 handlerTime(arr)
+    //             }
+    //             console.log(new Date())
+    //         }, (total) * 1000)
+
+    //     }
+    // }
+
+    // let arr = [1, 2, 3]
+
+    // function handlerTime(arr) {
+    //     for (let i = 0; i < arr.length; i++) {
+
+    //         (function (i) {
+    //             let total = i == 0 ? arr[i] : 0;
+
+    //             if (i != 0) {
+    //                 for (let n = 0; n <= i; n++) {
+    //                     total = total + arr[n]
+    //                 }
+    //             }
+
+    //             setTimeout(function () {
+    //                 if (i == arr.length - 1) {
+    //                     handlerTime(arr)
+    //                 }
+    //                 console.log("我是值", i);
+    //             }, (total) * 1000)
+    //         })(i)
+
+    //     }
+    // }
+
+
+
+    // handlerTime(arr);
+
+    // handlerTime(arr);
+    // let arr = [4, 5, 6, 7, 8]
+    // function handlerTime (arr){
+    //     var date=new Date();
+    //     for (let i = 0; i < arr.length; i++) {
+    //         setTimeout( function() {
+    //             if (i == arr.length - 1) {
+    //                 handlerTime(arr)
+    //             }
+    //             console.log(new Date(););
+
+
+    //         }, (arr[i] * 2) * 1000)
+    //     }
+    // }
+
+
+    // handlerTime(arr);
+
+
+
+
+    // var set1 = setInterval(fn, arr1[a]);
+    // function fn() {
+    //     if(a==arr1.length){
+    //         a=0;
+    //     }
+    //     clearInterval(set1);
+    //     a++
+    //     set1 = setInterval(fn, arr1[a]);
+    //     console.log(arr1[a]);
+
+    // }
+
+    //     function del(arr) {
+    //     let array = [];
+    //     for (let i = 0; i < arr.length; i++) {
+    //         if (arr.indexOf(arr[i]) != arr.lastIndexOf(arr[i]) && array.indexOf(arr[i]) == -1) {
+    //             array.push(arr[i]);
+    //         }
+    //     }
+    //     return array;
+    // }
+
+
+    // let timer = setInterval(function () {
+    //     if (a == arr1.length) {
+    //         a = 0;
+    //     }
+    //     for (let i = 0; i < arr1.length; i++) {
+
+    //         console.log(new Date())
+
+
+    //     }
+    //     a++;
+    //     clearInterval(timer);
+    // }, arr1[a] * 1000);
+
+
+    // const handlerTime = (arr) => {
+    //     for (let i = 0; i < arr.length; i++) {
+    //         let total = 0;
+    //         if (i != 0) {
+    //             for (let n = 0; n < i; n++) {
+    //                 total += arr[i]
+    //             }
+    //         }
+
+    //         setTimeout(() => {
+    //             if (i == arr.length - 1) {
+    //                 handlerTime(arr)
+    //             }
+    //             console.log("我是数组中的值", arr[i]);
+    //         }, (total) * 1000)
+    //     }
+    // }
+
+
+    // handlerTime(arr);
+
+
+// var arr=[1,1,3,4,4,5,3,1,100,100,6,9,10];
+// console.log(del(arr));
+// for(var i = 0; i < 5; i++) {
+//     (function(i) {
+//         clearInterval(timer);
+//         var timer=setInterval(function() {
+//             // console.log(i*5);
+//         }, (i * 5) * 1000)
+//     })(i)
+// }
+// var str = '02023659569928320101#3df31e34be9f4048###99f387923ec6e5b4';
+// var str2 = str.replace(/#/g, '23%');
+// console.log(str2)
+
+</script>
+</body>
+</html>
